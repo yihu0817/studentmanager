@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
@@ -19,7 +20,7 @@
 			<div class="xs6 xm4 xs3-move xm4-move">
 				<div style="height: 150px;"></div>
 				<div class="media media-y margin-big-bottom"></div>
-				<form action="./login.do" method="post" enctype="application/x-www-form-urlencoded">
+				<form action="./login.do" method="post">
 					<div class="panel loginbox">
 						<div class="text-center margin-big padding-big-top">
 							<h1>后台管理中心</h1>
@@ -51,7 +52,9 @@
 								value="登录">
 						</div>
 					</div>
-				</form>
+				</form> 
+				
+				
 			</div>
 		</div>
 	</div>

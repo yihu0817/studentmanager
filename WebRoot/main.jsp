@@ -35,17 +35,12 @@
 			</h2>
 			<ul style="display: block">
 				<li>
-					<a href="add_user.jsp" target="right"><span
+					<a href="jsp/user/add_user.jsp" target="right"><span
 						class="icon-caret-right"></span>添加用户</a>
 				</li>
 				<li>
-					<a href="./user_list.do" target="right"><span
+					<a href="user_show.do" target="right"><span
 						class="icon-caret-right"></span>用户列表</a>
-				</li>
-				
-				<li>
-					<a href="info.html" target="right"><span
-						class="icon-caret-right"></span>查找用户</a>
 				</li>
 
 			</ul>

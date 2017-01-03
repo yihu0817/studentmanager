@@ -11,11 +11,11 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
 public class LoginAction extends ActionSupport implements ModelDriven<User>,RequestAware {
-	private User user = new User();
-	private UserServer userServer = new UserServerImpl();
-	private Map<String, Object> requestMap;
+	private User user = new User();//接收表单提交数据
+	private Map<String, Object> requestMap; //操作request对象
+	private UserServer userServer = new UserServerImpl();  //业务实例
 	@Override
-	public User getModel() {
+	public User getModel() {  
 		return user;
 	}
 
@@ -33,7 +33,5 @@ public class LoginAction extends ActionSupport implements ModelDriven<User>,Requ
 	public void setRequest(Map<String, Object> request) {
 		requestMap = request;
 	}
-	
-	
 
 }
