@@ -30,7 +30,6 @@ public class UserServerImpl implements UserServer {
 	@Override
 	public ArrayList<User> getAllUser() {
 		return userDao.getAllUser();
-		
 	}
 	@Override
 	public void deleteUser(int id) {
