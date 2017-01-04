@@ -35,7 +35,14 @@
 		    %>
 		    
 			<tr bgcolor="<%=color%>">
-				<td><img src= "${pageContext.request.contextPath}${student.headerImg}" width="60px" height="60px"/></td>
+				<td>
+					<c:if test="${empty student.headerImg}">
+					    <img src= "${pageContext.request.contextPath}/images/y.jpg" width="60px" height="60px"/>
+					</c:if>
+					<c:if test="${!empty student.headerImg}">
+					   <img src= "${pageContext.request.contextPath}${student.headerImg}" width="60px" height="60px"/>
+					</c:if>
+				</td>
 				<td>${student.name}</td>
 				<td>${student.number}</td>
 				<td>${student.age}</td>
@@ -43,7 +50,7 @@
 				    <c:if test="${student.sex == false}">女</c:if>
 				</td>
 				<td><a href="./user_delete.do?id=${user.id}">删除</a></td>
-				<td><a href="./user_update.do?id=${user.id}">修改</a></td>
+				<td><a href="./student_update.do?number=${student.number}">修改</a></td>
 			</tr>
 			
 			

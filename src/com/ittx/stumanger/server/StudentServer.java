@@ -17,4 +17,6 @@ public interface StudentServer {
 	void updateStudent(Student student);// 修改学生业务
 	
 	void addStudent(Student student);
+	
+	Student selectStudentById(int ids) ;
 }

@@ -84,4 +84,9 @@ public class StudentServerImpl implements StudentServer {
 
 	}
 
+	@Override
+	public Student selectStudentById(int ids) {
+		return studentDao.selectStudentById(ids);
+	}
+
 }

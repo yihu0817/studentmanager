@@ -14,4 +14,6 @@ public interface StudentDao {
 	Student selectStudentByNumber(int number); // 查询指定学号学生
 
 	void updateStudent(Student student);// 修改学生
+	
+	Student selectStudentById(int ids) ;
 }

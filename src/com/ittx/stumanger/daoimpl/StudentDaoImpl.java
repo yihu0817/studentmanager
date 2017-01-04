@@ -127,12 +127,51 @@ public class StudentDaoImpl extends ConnectDB implements StudentDao {
 			ps.setInt(1, number);
 			rs = ps.executeQuery();
 			if (rs.next()) {
+				int id = rs.getInt("id");
 				String name = rs.getString("name");
 				int num = rs.getInt("number");
 				int age = rs.getInt("age");
 				boolean sex = rs.getBoolean("sex");
 				String url = rs.getString("header_url");
-				student = new Student(name, num, age, sex,url);
+				student = new Student(id,name, age,num,  sex,url);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (ps != null)
+					ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			closeConnection(connect);
+		}
+
+		return student;
+	}
+	
+	@Override
+	public Student selectStudentById(int ids) {
+		String sql = "SELECT * FROM student WHERE id = ?";
+		Connection connect = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		Student student = null;
+		try {
+			connect = getConnection();
+			ps = connect.prepareStatement(sql);
+			ps.setInt(1, ids);
+			rs = ps.executeQuery();
+			if (rs.next()) {
+				int id = rs.getInt("id");
+				String name = rs.getString("name");
+				int num = rs.getInt("number");
+				int age = rs.getInt("age");
+				boolean sex = rs.getBoolean("sex");
+				String url = rs.getString("header_url");
+				student = new Student(id,name, age,num,  sex,url);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -152,7 +191,7 @@ public class StudentDaoImpl extends ConnectDB implements StudentDao {
 	}
 	
 	public void updateStudent(Student student){
-		String sql = "UPDATE student SET name=?,age=?,sex=?,header_url=? where number=?";
+		String sql = "UPDATE student SET name=?,age=?,sex=?,header_url=?,number=? where id=?";
 		Connection connect = null;
 		PreparedStatement ps = null;
 
@@ -165,6 +204,7 @@ public class StudentDaoImpl extends ConnectDB implements StudentDao {
 			ps.setBoolean(3, student.isSex());
 			ps.setString(4, student.getHeaderImg());
 			ps.setInt(5, student.getNumber());
+			ps.setInt(6,student.getId());
 
 			ps.execute();
 
@@ -181,5 +221,7 @@ public class StudentDaoImpl extends ConnectDB implements StudentDao {
 			closeConnection(connect);
 		}
 	}
+	
+	
 
 }

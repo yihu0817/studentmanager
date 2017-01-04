@@ -1,6 +1,7 @@
 package com.ittx.stumanger.model;
 
 public class Student {
+	private int id;
 	private String name; // 姓名
 	private int age; // 年龄
 	private int number; // 学号
@@ -14,7 +15,14 @@ public class Student {
 		this.sex = sex;
 		this.headerImg = headerImg;
 	}
-
+	public Student(int id,String name, int age, int number, boolean sex, String headerImg) {
+		this.id = id;
+		this.name = name;
+		this.age = age;
+		this.number = number;
+		this.sex = sex;
+		this.headerImg = headerImg;
+	}
 	public Student() {
 	}
 
@@ -62,6 +70,14 @@ public class Student {
 	public String toString() {
 		return "Student [name=" + name + ", age=" + age + ", number=" + number + ", sex=" + sex + ", headerImg="
 				+ headerImg + "]";
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 }
