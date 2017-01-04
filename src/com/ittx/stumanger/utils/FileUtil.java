@@ -5,6 +5,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
@@ -21,7 +23,7 @@ public class FileUtil {
 	 * 创建多级文件目录 指定文件 如: e:/liu/hai/bing.txt
 	 */
 	public static boolean createFile(File file) {
-		if(file.exists()){
+		if (file.exists()) {
 			return true;
 		}
 		try {
@@ -58,7 +60,7 @@ public class FileUtil {
 		return file;
 
 	}
-	
+
 	/**
 	 * 根据盘符 e:/zip_demo.zip
 	 * 
@@ -175,7 +177,7 @@ public class FileUtil {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public static boolean deleteFile(String path) throws FileNotFoundException {
 		return deleteFile(new File(path));
 	}
@@ -185,34 +187,34 @@ public class FileUtil {
 	 * 
 	 * @param file
 	 * @return
-	 * @throws FileNotFoundException 
+	 * @throws FileNotFoundException
 	 */
 	public static boolean deleteFile(File file) throws FileNotFoundException {
-		if(file == null){
+		if (file == null) {
 			throw new NullPointerException("删除文件不能为空!");
 		}
-		
-		if(!file.exists()){
+
+		if (!file.exists()) {
 			throw new FileNotFoundException("文件不存在!");
 		}
-		
+
 		if (file.isFile()) {
-			file.delete();  //删除文件
+			file.delete(); // 删除文件
 			return true;
 		}
 
-		if(file.isDirectory()){
+		if (file.isDirectory()) {
 			File[] fileLists = file.listFiles();
-			for(File f : fileLists){
+			for (File f : fileLists) {
 				deleteFile(f);
 			}
-			file.delete(); //删除空目录
+			file.delete(); // 删除空目录
 		}
-		
+
 		return true;
 
 	}
-	
+
 	/**
 	 * 判断是否文件路径，如果是路径进行切割获取文件名
 	 * 
@@ -228,4 +230,23 @@ public class FileUtil {
 		}
 		return fileName;
 	}
+
+	/**
+	 * 读取oldFile文件数据写入newFile文件
+	 * @param oldFile
+	 * @param newFile
+	 * @throws IOException
+	 */
+	public static void copeFile(File oldFile, File newFile) throws IOException {
+		InputStream in = new FileInputStream(oldFile);
+		OutputStream os = new FileOutputStream(newFile);
+		byte[] bytes = new byte[512];
+		int len = 0;
+		while ((len = in.read(bytes)) != -1) {
+			os.write(bytes, 0, len);
+		}
+		os.close();
+		in.close();
+	}
+
 }

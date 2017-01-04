@@ -21,6 +21,11 @@ public class StudentServerImpl implements StudentServer {
 	private StudentDao studentDao = new StudentDaoImpl();
 
 	@Override
+	public void addStudent(Student student) {
+		studentDao.addStudent(student);
+	}
+	
+	@Override
 	public boolean addStudent(HashMap<String, String> parameters, String rootDir) {
 		String userName = parameters.get("name");
 		int number = Integer.parseInt(parameters.get("number"));

@@ -53,7 +53,7 @@
 						class="icon-caret-right"></span>学生列表</a>
 				</li>
 				<li>
-					<a href="add_student.jsp" target="right"><span
+					<a href="jsp/student/student_add.jsp" target="right"><span
 						class="icon-caret-right"></span>添加学生</a>
 				</li>
 				<li>

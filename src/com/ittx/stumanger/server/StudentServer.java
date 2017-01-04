@@ -15,4 +15,6 @@ public interface StudentServer {
 	Student selectStudentByNumber(int number); // 查询指定学号学生业务
 
 	void updateStudent(Student student);// 修改学生业务
+	
+	void addStudent(Student student);
 }
