@@ -1,6 +1,7 @@
 package com.ittx.stumanger.control;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Map;
 
 import org.apache.struts2.ServletActionContext;
@@ -16,29 +17,43 @@ public class StudentAction extends ActionSupport implements RequestAware{
 	private StudentServer studentServer = new StudentServerImpl();
 	private Map<String, Object> requestMap;
 	private File myfile; // File对象名
-	private String myfileFileName; // 获取原文件名规则:File对象名+FileName，如:'myfile' +
-									// 'FileName'
+	private String myfileFileName; // 获取原文件名规则:File对象名+FileName，如:'myfile' + 'FileName'
 	private String name;  //姓名
 	private int number;   //学号
 	private int age;      //年龄
 	private int sex;      //性别  1男  0女
 
-	@Override
-	public String execute() throws Exception {
-		String saveDir = ServletActionContext.getServletContext().getRealPath("/upload");
-		System.out.println("saveDir :"+saveDir);
-		File saveFile = new File(saveDir, myfileFileName);
-		FileUtil.createFile(saveFile);
-		FileUtil.copeFile(myfile, saveFile);
-
-		String headerUrl = "/upload/"+myfileFileName;
-		Student student = new Student(name,age,number,sex==1?true:false,headerUrl);
-		studentServer.addStudent(student);
+	public String add() throws Exception {
+		String headerUrl = ""; //保存头像地址
+		Student stu = studentServer.selectStudentByNumber(number);
+		//判断学生是否已存在，null表示添加学生不存在
+		if(stu == null){ 
+			//是否上传头像     ！=null表示上传头像
+			if(myfile != null){ 
+				String saveDir = ServletActionContext.getServletContext().getRealPath("/upload");
+				System.out.println("saveDir :"+saveDir);
+				File saveFile = new File(saveDir, myfileFileName);
+				FileUtil.createFile(saveFile);
+				FileUtil.copeFile(myfile, saveFile);
+				headerUrl = "/upload/"+myfileFileName;
+			}
+			Student student = new Student(name,age,number,sex==1?true:false,headerUrl);
+			studentServer.addStudent(student);
+			
+			return SUCCESS;
+		}else{
+			requestMap.put("message","添加学生已在!");
+			return INPUT;
+		}
 		
-		requestMap.put("message", "添加学生成功!");
-		return SUCCESS;
 	}
 
+	public String show(){
+		ArrayList<Student> list = studentServer.selectAllStudent();
+		requestMap.put("studentLists", list);
+		return "list";
+	}
+	
 	public File getMyfile() {
 		return myfile;
 	}

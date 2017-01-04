@@ -17,8 +17,10 @@
 			<result type="chain">user_show</result>
 		</action>
 
-		<action name="student_add" class="com.ittx.stumanger.control.StudentAction">
-			<result>/jsp/student/student_add.jsp</result>
+		<action name="student_*" class="com.ittx.stumanger.control.StudentAction" method="{1}">
+			<result type="chain">student_show</result>
+			<result name="input">/jsp/student/student_add.jsp</result>
+			<result name="list">/jsp/student/student_list.jsp</result>
 		</action>
 	
 	</package>

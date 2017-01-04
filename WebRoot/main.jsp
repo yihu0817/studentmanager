@@ -49,7 +49,7 @@
 			</h2>
 			<ul>
 				<li>
-					<a href="./student_list.do" target="right"><span
+					<a href="student_show.do" target="right"><span
 						class="icon-caret-right"></span>学生列表</a>
 				</li>
 				<li>
